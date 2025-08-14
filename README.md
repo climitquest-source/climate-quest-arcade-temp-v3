@@ -1,39 +1,38 @@
-# Climate Quest - Arcade (Git Ready)
+# Climate Quest - Arcade (Modes)
 
-Static HTML/CSS/JS trivia game. No build step.
+This build adds three modes + a live leaderboard:
+- **Single player**
+- **Group live (event)** — submit scores to Google Form + show a live leaderboard from a published Google Sheet CSV
+- **Pass & Play (hotseat)** — multiple players on one device, sequential rounds with a summary
 
-## Run local
-- `python3 -m http.server 8000` then open http://localhost:8000
-- or `npx serve`
-
-## Cloudflare Pages (Git)
-1. Create a new Pages project from your Git repo.
-2. Framework preset: **None**
-3. Build command: **leave blank** *(or set to `exit 0`)*
-4. Build output directory: **.**
-5. Root directory: **/** (repo root with `index.html`)
-6. Environment variables: none
-7. Deploy
-
-If you created a project with a wrong build step: Project → Settings → Build & deploy → set **Build command** blank and **Output directory** to `.`. Re-deploy.
-
-## Cloudflare Pages (Direct upload)
-- Project → Create new deployment → **Direct upload** → upload the **files/folder**, not a zip.
-
-## Wrangler CLI (optional)
-```bash
-npx wrangler login
-npx wrangler pages deploy . --project-name <your-project-name>
+## Cloudflare Pages
+Deploy as a static site. No build step. Root folder should contain:
+```
+index.html
+styles.css
+app.js
+assets/
+.nojekyll (optional)
 ```
 
-## Files
-- `index.html` — app shell
-- `styles.css` — base styles
-- `app.js` — game logic with timer, streaks, scoring, localStorage
-- `assets/` — icons and og image
-- `.nojekyll` — harmless; helps if you mirror to GitHub Pages
+## Group live setup (Google Form + Sheet)
+1. Create a **Google Form** with fields in this order and names exactly:
+   - Event Code
+   - Team
+   - Nickname
+   - Score
+   - CorrectTotal
+   - ISO Date
+2. Get the Form `formResponse` URL and paste into `CONFIG.GOOGLE_FORM_ACTION` in `app.js`.
+3. Open the linked **Google Sheet** → File → **Share** → **Publish to the web** → format **CSV** for the responses sheet. Copy the CSV link into `CONFIG.SHEET_CSV_URL`.
+4. Optional: paste your Sheet view link into `CONFIG.GOOGLE_SHEET_URL` to expose a quick link in the app.
+5. Finally, edit the `entry.******` IDs in `submitScoreToGoogleForm()` to match your Form field IDs.
 
-## Notes
-- Paths are relative: `styles.css`, `app.js`, `assets/icon.png`.
-- No SPA routing; no redirects needed.
-- To add a shared leaderboard, set your Google Form URL in `CONFIG.GOOGLE_FORM_ACTION` inside `app.js` and map your `entry.*` IDs.
+## Scoreboard screen
+- Enter the Event Code and choose **Individuals** or **Teams**, then Load.
+- Use **Auto-refresh** during events.
+
+## Pass & Play
+- Choose **Pass & Play** on Home.
+- Enter comma-separated names.
+- Each player plays a round on the same device; a summary table shows at the end.

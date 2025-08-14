@@ -25,18 +25,38 @@
   </header>
 
   <main>
+    <!-- HOME -->
     <section id="screen-home" class="screen active">
       <div class="card">
         <h2>Ready to play?</h2>
-        <p>Answer as many questions as you can. Beat the clock. Learn as you go.</p>
+        <p>Pick a mode, then answer fast. Learn as you go.</p>
+
+        <div class="row">
+          <label for="mode">Mode</label>
+          <select id="mode">
+            <option value="solo">Single player</option>
+            <option value="group">Group live (event)</option>
+            <option value="hotseat">Pass & Play</option>
+          </select>
+        </div>
 
         <div class="row">
           <label for="nickname">Nickname</label>
           <input id="nickname" type="text" placeholder="e.g., Omar" maxlength="18" />
         </div>
 
+        <div class="row" id="teamRow" hidden>
+          <label for="teamName">Team name (optional for Group)</label>
+          <input id="teamName" type="text" placeholder="e.g., Green Tigers" maxlength="22" />
+        </div>
+
+        <div class="row" id="playersRow" hidden>
+          <label for="playersList">Players for Pass & Play (comma separated)</label>
+          <input id="playersList" type="text" placeholder="Aisha, Bilal, Omar" />
+        </div>
+
         <div class="row">
-          <label for="eventCode">Event code (optional)</label>
+          <label for="eventCode">Event code (optional for Group)</label>
           <input id="eventCode" type="text" placeholder="e.g., RIVERCAMP" maxlength="20" />
         </div>
 
@@ -62,7 +82,8 @@
         </div>
 
         <div class="cta">
-          <button id="btn-play" class="primary">Play Trivia Sprint</button>
+          <button id="btn-play" class="primary">Play</button>
+          <button id="btn-open-scoreboard" class="ghost">Live Leaderboard</button>
         </div>
 
         <div class="stats">
@@ -71,11 +92,12 @@
         </div>
 
         <div class="links">
-          <a id="topScoresLink" href="#" target="_blank" rel="noopener" class="disabled">Top Scores (Event)</a>
+          <a id="topScoresLink" href="#" target="_blank" rel="noopener" class="disabled">Event sheet</a>
         </div>
       </div>
     </section>
 
+    <!-- GAME -->
     <section id="screen-game" class="screen">
       <div class="hud">
         <div class="hud-left">
@@ -98,6 +120,7 @@
       </div>
     </section>
 
+    <!-- RESULTS -->
     <section id="screen-result" class="screen">
       <div class="card">
         <h2>Results</h2>
@@ -105,30 +128,56 @@
         <div class="result-line">Correct: <strong id="res-correct">0</strong>/<span id="res-total">0</span></div>
         <div class="result-line">Longest streak: <strong id="res-streak">0</strong></div>
         <div id="res-badges" class="badges"></div>
-
         <div id="res-submit-note" class="note"></div>
-
+        <div id="hotseat-summary" class="note"></div>
         <div class="cta">
+          <button id="btn-next-player" class="primary" style="display:none">Next Player</button>
           <button id="btn-play-again" class="primary">Play Again</button>
           <button id="btn-home" class="ghost">Home</button>
         </div>
       </div>
     </section>
 
+    <!-- SCOREBOARD -->
+    <section id="screen-scoreboard" class="screen">
+      <div class="card">
+        <h2>Live Leaderboard</h2>
+        <div class="row">
+          <label for="sbEvent">Event code</label>
+          <input id="sbEvent" type="text" placeholder="e.g., RIVERCAMP" />
+        </div>
+        <div class="row">
+          <label for="sbMode">View</label>
+          <select id="sbMode">
+            <option value="individuals">Individuals</option>
+            <option value="teams">Teams</option>
+          </select>
+        </div>
+        <div class="cta">
+          <button id="btn-load-sb" class="primary">Load</button>
+          <button id="btn-auto-sb" class="ghost">Auto-refresh: Off</button>
+          <button id="btn-scoreboard-home" class="ghost">Home</button>
+        </div>
+        <div id="sbStatus" class="note"></div>
+        <div id="sbTableWrap" class="table-wrap"></div>
+      </div>
+    </section>
+
+    <!-- HELP -->
     <dialog id="helpDialog">
       <h3>How to play</h3>
       <ol>
-        <li>Pick a category (or Mixed) and the number of questions.</li>
+        <li>Pick a mode. Group mode can submit scores to a Google Sheet.</li>
         <li>You have 12 seconds per question. Faster answers = more points.</li>
         <li>Streaks give a multiplier. Use 50/50 or Hint when you need it.</li>
       </ol>
-      <p>Event organizers can set an event code and a Google Form to collect scores.</p>
+      <p>To enable Live Leaderboard, publish your Google Sheet as CSV and paste the link in CONFIG.SHEET_CSV_URL.</p>
       <div class="cta"><button id="btn-close-help" class="primary">Close</button></div>
     </dialog>
   </main>
 
   <footer class="site-footer">
-    <small>Git-ready build. No tracking.</small>
+    <small>No tracking. Works on any static host.</small>
   </footer>
 
   <script src="app.js"></script>
