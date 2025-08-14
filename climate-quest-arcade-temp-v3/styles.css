@@ -1,0 +1,54 @@
+/* Climate Quest - Arcade (Temp Build) */
+:root{
+  --bg:#ffffff;
+  --text:#0f172a;
+  --muted:#6b7280;
+  --primary:#0ea5e9;
+  --primary-dark:#0284c7;
+  --card:#f8fafc;
+  --border:#e5e7eb;
+  --good:#16a34a;
+  --bad:#dc2626;
+  --warn:#d97706;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,sans-serif;line-height:1.4;}
+.site-header, .site-footer{padding:12px 16px;border-bottom:1px solid var(--border);}
+.site-footer{border-top:1px solid var(--border);border-bottom:none;text-align:center;color:var(--muted);}
+.brand{display:flex;align-items:center;gap:10px;}
+.logo{width:32px;height:32px;}
+.tag{font-size:14px;color:var(--muted);}
+nav{float:right;}
+main{padding:16px;max-width:800px;margin:0 auto;}
+.screen{display:none;}
+.screen.active{display:block;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,0.04);}
+.row{display:flex;flex-direction:column;margin:10px 0;}
+label{font-size:14px;color:var(--muted);margin-bottom:6px;}
+input[type=text], select{padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:#fff;}
+.cta{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+button{padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:#fff;cursor:pointer;}
+button.primary{background:var(--primary);border-color:var(--primary);color:#fff;}
+button.primary:hover{background:var(--primary-dark);border-color:var(--primary-dark);}
+button.ghost{background:transparent;}
+button.small{padding:6px 10px;font-size:14px;}
+button:disabled{opacity:.6;cursor:not-allowed;}
+.links{margin-top:10px;}
+.links a{color:var(--primary);text-decoration:none;}
+.links a.disabled{pointer-events:none;color:var(--muted);}
+.stats{margin-top:12px;color:var(--muted);}
+.hud{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;color:var(--muted);}
+.question-card{min-height:260px;}
+.q-text{font-size:20px;margin-bottom:12px;}
+.choices{display:grid;grid-template-columns:1fr;gap:10px;}
+@media(min-width:640px){.choices{grid-template-columns:1fr 1fr;}}
+.choice{padding:12px;border:1px solid var(--border);border-radius:12px;background:#fff;cursor:pointer;}
+.choice.correct{border-color:var(--good);background:#ecfdf5;}
+.choice.wrong{border-color:var(--bad);background:#fef2f2;}
+.helpers{display:flex;gap:8px;margin-top:10px;}
+.result-line{margin:6px 0;font-size:18px;}
+.note{margin-top:10px;color:var(--muted);}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.badge{padding:6px 10px;border-radius:999px;background:#e0f2fe;border:1px solid #bae6fd;font-size:13px;}
+dialog{border:none;border-radius:16px;padding:16px;max-width:520px;width:calc(100% - 32px);}
+dialog::backdrop{background:rgba(0,0,0,0.35);}

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Climate Quest - Arcade (Temp Build)</title>
+  <meta name="description" content="Fast climate trivia that teaches real facts. Temp build for testing." />
+  <meta property="og:title" content="Climate Quest - Arcade" />
+  <meta property="og:description" content="Fast climate trivia that teaches real facts." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/og-image.png" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="assets/icon.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="assets/icon.png" alt="Leaf icon" class="logo" />
+      <h1>Climate Quest <span class="tag">Arcade</span></h1>
+    </div>
+    <nav>
+      <button id="btn-help" class="ghost">Help</button>
+    </nav>
+  </header>
+  <main>
+    <section id="screen-home" class="screen active">
+      <div class="card">
+        <h2>Ready to play?</h2>
+        <p>Answer as many questions as you can. Beat the clock. Learn as you go.</p>
+        <div class="row">
+          <label for="nickname">Nickname</label>
+          <input id="nickname" type="text" placeholder="e.g., Omar" maxlength="18" />
+        </div>
+        <div class="row">
+          <label for="eventCode">Event code (optional)</label>
+          <input id="eventCode" type="text" placeholder="e.g., RIVERCAMP" maxlength="20" />
+        </div>
+        <div class="row">
+          <label for="category">Category</label>
+          <select id="category">
+            <option value="mixed">Mixed (All)</option>
+            <option value="Energy">Energy</option>
+            <option value="Food">Food</option>
+            <option value="Waste">Waste</option>
+            <option value="Water">Water</option>
+            <option value="Transport">Transport</option>
+            <option value="Justice">Climate Justice</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="numQuestions">Questions</label>
+          <select id="numQuestions">
+            <option value="10">10</option>
+            <option value="15">15</option>
+          </select>
+        </div>
+        <div class="cta">
+          <button id="btn-play" class="primary">Play Trivia Sprint</button>
+        </div>
+        <div class="stats">
+          <div>Best score: <strong id="bestScore">0</strong></div>
+          <div>Badges: <span id="badgeList"></span></div>
+        </div>
+        <div class="links">
+          <a id="topScoresLink" href="#" target="_blank" rel="noopener" class="disabled">Top Scores (Event)</a>
+        </div>
+      </div>
+    </section>
+    <section id="screen-game" class="screen">
+      <div class="hud">
+        <div class="hud-left">
+          <span id="hud-nickname">Player</span> · <span id="hud-category">Mixed</span>
+        </div>
+        <div class="hud-right">
+          <span>⏱ <span id="hud-time">12</span>s</span> ·
+          <span>🔥 x<span id="hud-streak">0</span></span> ·
+          <span>⭐ <span id="hud-score">0</span></span>
+        </div>
+      </div>
+      <div class="card question-card">
+        <div id="qText" class="q-text">Question text</div>
+        <div id="choices" class="choices"></div>
+        <div class="helpers">
+          <button id="btn-5050" class="ghost small">50/50 (<span id="left-5050">1</span>)</button>
+          <button id="btn-hint" class="ghost small">Hint (<span id="left-hint">1</span>)</button>
+        </div>
+      </div>
+    </section>
+    <section id="screen-result" class="screen">
+      <div class="card">
+        <h2>Results</h2>
+        <div class="result-line">Score: <strong id="res-score">0</strong></div>
+        <div class="result-line">Correct: <strong id="res-correct">0</strong>/<span id="res-total">0</span></div>
+        <div class="result-line">Longest streak: <strong id="res-streak">0</strong></div>
+        <div id="res-badges" class="badges"></div>
+        <div id="res-submit-note" class="note"></div>
+        <div class="cta">
+          <button id="btn-play-again" class="primary">Play Again</button>
+          <button id="btn-home" class="ghost">Home</button>
+        </div>
+      </div>
+    </section>
+    <dialog id="helpDialog">
+      <h3>How to play</h3>
+      <ol>
+        <li>Pick a category (or Mixed) and the number of questions.</li>
+        <li>You have 12 seconds per question. Faster answers = more points.</li>
+        <li>Streaks give a multiplier. Use 50/50 or Hint when you need it.</li>
+      </ol>
+      <p>Event organizers can set an event code and a Google Form to collect scores.</p>
+      <div class="cta"><button id="btn-close-help" class="primary">Close</button></div>
+    </dialog>
+  </main>
+  <footer class="site-footer">
+    <small>Temp build for testing · No tracking · Works offline when cached by your browser.</small>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
